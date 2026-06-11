@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by mbouhia.*
+*This project has been created as part of the 42 curriculum by ael-jama.*
 
 ---
 
@@ -66,9 +66,9 @@ All containers are built from `debian:bookworm` base image and are configured to
 
 2. **Create required data directories:**
    ```bash
-   sudo mkdir -p /home/mbouhia/data/mariadb
-   sudo mkdir -p /home/mbouhia/data/wordpress
-   sudo mkdir -p /home/mbouhia/data/redis
+   sudo mkdir -p /home/ael-jama/data/mariadb
+   sudo mkdir -p /home/ael-jama/data/wordpress
+   sudo mkdir -p /home/ael-jama/data/redis
    ```
 
 3. **Configure secrets:**
@@ -78,7 +78,7 @@ All containers are built from `debian:bookworm` base image and are configured to
 
 4. **Update hosts file (optional):**
    ```bash
-   echo "127.0.0.1 mbouhia.42.fr" | sudo tee -a /etc/hosts
+   echo "127.0.0.1 ael-jama.42.fr" | sudo tee -a /etc/hosts
    ```
 
 ### Running the Project
@@ -104,10 +104,10 @@ make clean
 
 | Service        | URL                                     | Description                    |
 |----------------|-----------------------------------------|--------------------------------|
-| WordPress      | https://mbouhia.42.fr                   | Main WordPress site            |
-| Static Website | https://mbouhia.42.fr/static_website/   | Static HTML website            |
-| Adminer        | https://mbouhia.42.fr/adminer/          | Database management interface  |
-| Netdata        | https://mbouhia.42.fr/netdata/          | Real-time monitoring dashboard |
+| WordPress      | https://ael-jama.42.fr                   | Main WordPress site            |
+| Static Website | https://ael-jama.42.fr/static_website/   | Static HTML website            |
+| Adminer        | https://ael-jama.42.fr/adminer/          | Database management interface  |
+| Netdata        | https://ael-jama.42.fr/netdata/          | Real-time monitoring dashboard |
 | FTP            | ftp://localhost:21                      | FTP access to WordPress files  |
 
 ---
@@ -180,7 +180,7 @@ All services are built using `debian:bookworm` to ensure:
 | **Performance** | Optimized by Docker                      | Direct filesystem access                 |
 | **Backup**      | Docker CLI tools                         | Standard filesystem tools                |
 
-**Project Choice**: The project uses named volumes with bind mount driver (`type: none, o: bind`) to persist data in specific host directories (`/home/mbouhia/data/`), combining the benefits of both approaches.
+**Project Choice**: The project uses named volumes with bind mount driver (`type: none, o: bind`) to persist data in specific host directories (`/home/ael-jama/data/`), combining the benefits of both approaches.
 
 ---
 
@@ -282,4 +282,4 @@ This project is part of the 42 school curriculum. All rights reserved.
 
 ## Author
 
-**mbouhia** — 42 Student
+**ael-jama** — 42 Student

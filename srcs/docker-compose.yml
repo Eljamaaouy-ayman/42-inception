@@ -7,6 +7,7 @@ services:
     secrets:
       - db_root_password
       - db_user_password
+      - grafana_reader_password
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -56,6 +57,8 @@ services:
     depends_on:
       - wordpress
       - adminer
+      - prometheus
+      - grafana
     restart: always
     volumes:
       - wp_data:/var/www/html
@@ -77,6 +80,36 @@ services:
     networks:
       - backend
 
+  prometheus:
+    build: ./requirements/bonus/prometheus
+    container_name: prometheus
+    restart: always
+    networks:
+      - backend           # Must match nginx network
+    volumes:
+      - prometheus_data:/prometheus
+    expose:
+      - "9090"
+    # Optional: Add healthcheck
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
+  grafana:
+    build: ./requirements/bonus/grafana
+    container_name: grafana
+    restart: always
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - backend    # Must be on same network as nginx!
+    expose:
+      - "3000"     # Only expose internally, not to host
+    depends_on:
+      - prometheus
+
   redis:
     build: ./requirements/bonus/redis
     container_name: redis
@@ -93,29 +126,45 @@ secrets:
     file: ../secrets/db_user_password.txt
   wp_admin_password:
     file: ../secrets/wp_admin_password.txt
+  grafana_reader_password:          # Add this
+    file: ../secrets/grafana_reader_password.txt
 
 volumes:
+  prometheus_data:
+    name: prometheus_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/eljamaaouy/data/prometheus
+  grafana_data:
+    name: grafana_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/eljamaaouy/data/grafana
   db_data:
     name: db_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/mbouhia/data/mariadb
+      device: /home/eljamaaouy/data/mariadb
   wp_data:
     name: wp_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/mbouhia/data/wordpress
+      device: /home/eljamaaouy/data/wordpress
   rd_data:
     name: rd_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/mbouhia/data/redis
+      device: /home/eljamaaouy/data/redis
   site:
     name: site
     driver: local

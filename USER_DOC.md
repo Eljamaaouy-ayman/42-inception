@@ -88,7 +88,7 @@ make clean
 
 1. Add the domain to your hosts file (one-time setup):
    ```bash
-   echo "127.0.0.1 mbouhia.42.fr" | sudo tee -a /etc/hosts
+   echo "127.0.0.1 ael-jama.42.fr" | sudo tee -a /etc/hosts
    ```
 
 2. Accept the self-signed certificate warning in your browser.
@@ -97,11 +97,11 @@ make clean
 
 | Access         | URL                                  |
 |----------------|--------------------------------------|
-| **Homepage**   | https://mbouhia.42.fr                |
-| **Admin Login**| https://mbouhia.42.fr/wp-admin       |
+| **Homepage**   | https://ael-jama.42.fr                |
+| **Admin Login**| https://ael-jama.42.fr/wp-admin       |
 
 To log into WordPress admin:
-1. Go to https://mbouhia.42.fr/wp-admin
+1. Go to https://ael-jama.42.fr/wp-admin
 2. Enter your WordPress username and password
 3. Click "Log In"
 
@@ -109,10 +109,10 @@ To log into WordPress admin:
 
 | Access     | URL                                  |
 |------------|--------------------------------------|
-| **Adminer**| https://mbouhia.42.fr/adminer/       |
+| **Adminer**| https://ael-jama.42.fr/adminer/       |
 
 To log into Adminer:
-1. Go to https://mbouhia.42.fr/adminer/
+1. Go to https://ael-jama.42.fr/adminer/
 2. Fill in:
    - **System:** MySQL
    - **Server:** mariadb
@@ -125,7 +125,7 @@ To log into Adminer:
 
 | Access      | URL                                  |
 |-------------|--------------------------------------|
-| **Netdata** | https://mbouhia.42.fr/netdata/       |
+| **Netdata** | https://ael-jama.42.fr/netdata/       |
 
 No login required. Shows real-time CPU, memory, disk, and network usage.
 
@@ -133,7 +133,7 @@ No login required. Shows real-time CPU, memory, disk, and network usage.
 
 | Access           | URL                                       |
 |------------------|-------------------------------------------|
-| **Static Site**  | https://mbouhia.42.fr/static_website/     |
+| **Static Site**  | https://ael-jama.42.fr/static_website/     |
 
 A simple static HTML website. No login required.
 
@@ -190,7 +190,7 @@ cat srcs/requirements/secrets/db_user_password.txt
 
 3. **Remove old data (required for password changes to take effect):**
    ```bash
-   sudo rm -rf /home/mbouhia/data/mariadb/*
+   sudo rm -rf /home/ael-jama/data/mariadb/*
    ```
 
 4. **Restart the project:**
@@ -232,7 +232,7 @@ You should see 8 containers running:
 
 **Check if Nginx is serving HTTPS:**
 ```bash
-curl -k https://mbouhia.42.fr
+curl -k https://ael-jama.42.fr
 ```
 ✅ Success: Returns HTML content  
 ❌ Failure: Connection refused or timeout
@@ -276,7 +276,7 @@ docker logs -f nginx
 
 ### Using Netdata Dashboard
 
-1. Open https://mbouhia.42.fr/netdata/
+1. Open https://ael-jama.42.fr/netdata/
 2. Check the following metrics:
    - **CPU Usage** — Should be stable, not constantly at 100%
    - **Memory Usage** — Should have available memory
@@ -327,8 +327,8 @@ If you see permission errors:
 
 ```bash
 # Fix data directory permissions
-sudo chown -R 1000:1000 /home/mbouhia/data/wordpress
-sudo chown -R 999:999 /home/mbouhia/data/mariadb
+sudo chown -R 1000:1000 /home/ael-jama/data/wordpress
+sudo chown -R 999:999 /home/ael-jama/data/mariadb
 ```
 
 ### Starting Fresh
@@ -340,10 +340,10 @@ If something is broken beyond repair:
 make down
 
 # Remove all data
-sudo rm -rf /home/mbouhia/data/*
+sudo rm -rf /home/ael-jama/data/*
 
 # Recreate directories
-sudo mkdir -p /home/mbouhia/data/{mariadb,wordpress,redis}
+sudo mkdir -p /home/ael-jama/data/{mariadb,wordpress,redis}
 
 # Rebuild from scratch
 make
@@ -360,11 +360,11 @@ make
 | Restart project           | `make re`                                 |
 | View running containers   | `docker ps`                               |
 | View container logs       | `docker logs <container-name>`            |
-| Access WordPress          | https://mbouhia.42.fr                     |
-| Access Admin panel        | https://mbouhia.42.fr/wp-admin            |
-| Access Static Website     | https://mbouhia.42.fr/static_website/     |
-| Access Adminer            | https://mbouhia.42.fr/adminer/            |
-| Access Netdata            | https://mbouhia.42.fr/netdata/            |
+| Access WordPress          | https://ael-jama.42.fr                     |
+| Access Admin panel        | https://ael-jama.42.fr/wp-admin            |
+| Access Static Website     | https://ael-jama.42.fr/static_website/     |
+| Access Adminer            | https://ael-jama.42.fr/adminer/            |
+| Access Netdata            | https://ael-jama.42.fr/netdata/            |
 
 ---
 

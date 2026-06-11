@@ -62,15 +62,15 @@ cd inception
 
 ### 2. Create Data Directories
 
-The project stores persistent data in `/home/mbouhia/data/`. Create these directories:
+The project stores persistent data in `/home/ael-jama/data/`. Create these directories:
 
 ```bash
-sudo mkdir -p /home/mbouhia/data/mariadb
-sudo mkdir -p /home/mbouhia/data/wordpress
-sudo mkdir -p /home/mbouhia/data/redis
+sudo mkdir -p /home/ael-jama/data/mariadb
+sudo mkdir -p /home/ael-jama/data/wordpress
+sudo mkdir -p /home/ael-jama/data/redis
 
 # Set appropriate permissions
-sudo chown -R $USER:$USER /home/mbouhia/data
+sudo chown -R $USER:$USER /home/ael-jama/data
 ```
 
 ### 3. Configure Environment Variables
@@ -84,7 +84,7 @@ nano srcs/requirements/.env
 **Current configuration:**
 
 ```env
-DOMAIN_NAME=mbouhia.42.fr
+DOMAIN_NAME=ael-jama.42.fr
 
 MYSQL_DATABASE=wordpress
 MYSQL_HOSTNAME=mariadb
@@ -93,7 +93,7 @@ MYSQL_USER=wp_user
 
 | Variable         | Description                        | Default         |
 |------------------|------------------------------------|-----------------|
-| `DOMAIN_NAME`    | Domain for Nginx server_name       | mbouhia.42.fr   |
+| `DOMAIN_NAME`    | Domain for Nginx server_name       | ael-jama.42.fr   |
 | `MYSQL_DATABASE` | WordPress database name            | wordpress       |
 | `MYSQL_HOSTNAME` | MariaDB container hostname         | mariadb         |
 | `MYSQL_USER`     | Database user for WordPress        | wp_user         |
@@ -120,7 +120,7 @@ echo "your_secure_user_password" > srcs/requirements/secrets/db_user_password.tx
 Add the domain to your hosts file:
 
 ```bash
-echo "127.0.0.1 mbouhia.42.fr" | sudo tee -a /etc/hosts
+echo "127.0.0.1 ael-jama.42.fr" | sudo tee -a /etc/hosts
 ```
 
 ---
@@ -275,9 +275,9 @@ The project defines three named volumes in `docker-compose.yml`:
 
 | Volume    | Container Path              | Host Path                      | Purpose                  |
 |-----------|-----------------------------| ------------------------------ |--------------------------|
-| db_data   | /var/lib/mysql              | /home/mbouhia/data/mariadb     | MariaDB database files   |
-| wp_data   | /var/www/html               | /home/mbouhia/data/wordpress   | WordPress files          |
-| rd_data   | /data                       | /home/mbouhia/data/redis       | Redis persistence        |
+| db_data   | /var/lib/mysql              | /home/ael-jama/data/mariadb     | MariaDB database files   |
+| wp_data   | /var/www/html               | /home/ael-jama/data/wordpress   | WordPress files          |
+| rd_data   | /data                       | /home/ael-jama/data/redis       | Redis persistence        |
 | site      | /var/www/html/static_website| Docker-managed                 | Static website files     |
 
 ### Volume Commands
@@ -317,7 +317,7 @@ volumes:
     driver_opts:
       type: none      # No special filesystem type
       o: bind         # Bind mount option
-      device: /home/mbouhia/data/mariadb  # Host path
+      device: /home/ael-jama/data/mariadb  # Host path
 ```
 
 ---
@@ -327,7 +327,7 @@ volumes:
 ### Where Data Is Stored
 
 ```
-/home/mbouhia/data/
+/home/ael-jama/data/
 ├── mariadb/          # MariaDB database files
 │   ├── ibdata1       # InnoDB data file
 │   ├── ib_logfile0   # InnoDB log file
@@ -367,7 +367,7 @@ volumes:
 make down
 
 # Backup all data
-sudo tar -czvf inception_backup_$(date +%Y%m%d).tar.gz /home/mbouhia/data/
+sudo tar -czvf inception_backup_$(date +%Y%m%d).tar.gz /home/ael-jama/data/
 
 # Restart containers
 make
@@ -380,7 +380,7 @@ make
 make down
 
 # Remove existing data
-sudo rm -rf /home/mbouhia/data/*
+sudo rm -rf /home/ael-jama/data/*
 
 # Restore backup
 sudo tar -xzvf inception_backup_YYYYMMDD.tar.gz -C /
@@ -484,7 +484,7 @@ docker exec mariadb mysql -u root -p -e "SHOW DATABASES;"
 docker exec redis redis-cli ping
 
 # Test WordPress
-curl -k https://mbouhia.42.fr
+curl -k https://ael-jama.42.fr
 ```
 
 ---
@@ -579,11 +579,11 @@ If something is completely broken:
 make clean
 
 # Remove data directories
-sudo rm -rf /home/mbouhia/data/*
+sudo rm -rf /home/ael-jama/data/*
 
 # Recreate directories
-sudo mkdir -p /home/mbouhia/data/{mariadb,wordpress,redis}
-sudo chown -R $USER:$USER /home/mbouhia/data
+sudo mkdir -p /home/ael-jama/data/{mariadb,wordpress,redis}
+sudo chown -R $USER:$USER /home/ael-jama/data
 
 # Rebuild from scratch
 make
@@ -605,7 +605,7 @@ docker compose -f ./srcs/docker-compose.yml logs -f
 | `srcs/requirements/.env`                    | Environment variables             |
 | `srcs/requirements/secrets/`                | Password files                    |
 | `srcs/requirements/<service>/Dockerfile`    | Container build instructions      |
-| `/home/mbouhia/data/`                       | Persistent data storage           |
+| `/home/ael-jama/data/`                       | Persistent data storage           |
 
 ### Port Mapping
 
