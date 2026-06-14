@@ -147,6 +147,7 @@ A simple static HTML website. No login required.
 | Pass   | ftppass                              |
 
 Use any FTP client (FileZilla, WinSCP, etc.) to connect and manage WordPress files.
+connect using lftp : lftp -u ftpuser,ftppass localhost
 
 ---
 
